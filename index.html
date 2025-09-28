@@ -5,49 +5,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>21 Creatives</title>
   <style>
+    /* General body styles */
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       text-align: center;
     }
+
+    /* All sections */
     section {
-      height: 100vh;
+      height: 100vh; /* full screen height */
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      font-size: 3rem;
-      font-weight: bold;
-      transition: background 1s, color 1s, text-shadow 1s;
+      font-size: 3rem; /* default size for text */
+      font-weight: bold; /* default bold text */
+      transition: background 1s, color 1s, text-shadow 1s; /* smooth transitions */
     }
+
+    /* Day section */
     .day {
       background: white;
       color: black;
       text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
     }
-    .hero {
-  font-size: 6rem;          /* makes the text really big */
-  font-weight: 900;         /* makes the text super bold */
-  letter-spacing: 5px;      /* spaces the letters out */
-  text-transform: uppercase;/* all letters become capital */
-  text-shadow:
-    4px 4px 10px rgba(0,0,0,0.3),
-    8px 8px 20px rgba(0,0,0,0.2); /* layered shadows for depth */
-}
 
+    /* Night section */
     .night {
       background: black;
       color: white;
       text-shadow: 2px 2px 8px rgba(255,255,255,0.5);
     }
+
+    /* Hero section styles */
+    .hero {
+      font-size: 6rem;          /* really big text */
+      font-weight: 900;         /* extra bold */
+      letter-spacing: 5px;      /* space between letters */
+      text-transform: uppercase;/* make all letters capital */
+      text-shadow:
+        4px 4px 10px rgba(0,0,0,0.3),
+        8px 8px 20px rgba(0,0,0,0.2); /* layered shadows for depth */
+    }
+
   </style>
 </head>
 <body>
+
+  <!-- Hero / Day Section -->
   <section class="day hero" id="hero">
     21 CREATIVES
   </section>
-  <section class="night" id="moon">
+
+  <!-- Night Section -->
+  <section class="night">
     WELCOME TO THE MOON
   </section>
+
 </body>
 </html>
