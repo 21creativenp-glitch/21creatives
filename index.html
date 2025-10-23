@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BUILD LEGACY</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+  <!-- Swiper JS (can go before closing </body>) -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+  <style>
+    /* === GENERAL === */
+    body {
+      margin: 0;
+      font-family: 'Anton', sans-serif;
+      background-color: #1a1a1a;
+      color: #ffffff;
+      height: 800vh;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* === BUILD TEXT === */
+    .build-text {
+      position: fixed;
+      top: 17%;
+      left: 43%;
+      transform: translateX(-50%);
+      font-size: 38vh;
+      line-height: 0.9;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)),
+        url('images/bg.jpg');
+      background-size: cover;
+      background-position: center;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: transform 1.2s ease, opacity 1.2s ease;
+      z-index: 2;
+    }
+
+    /* === HERO BUTTON === */
+    .hero-button {
+      position: fixed;
+      top: 25%;
+      left: 64%;
+      width: 21vh;
+      height: 21vh;
+      border: none;
+      border-radius: 50%;
+      background-image: url('images/2.png'), url('images/1.jpg');
+      background-size: 80% 80%, cover;
+      background-position: center center, 50% 20%;
+      background-repeat: no-repeat, no-repeat;
+      cursor: pointer;
+      animation: bounce 1.5s infinite;
+      transition: transform 1.2s ease, opacity 1.2s ease;
+      z-index: 2;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10%); }
+    }
+
+    /* === LEGACY TEXT === */
+    .legacy-text {
+      position: fixed;
+      top: 26%;
+      left: 49.5%;
+      transform: translateX(-50%);
+      font-size: 38vh;
+      line-height: 0.9;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)),
+        url('images/bg.jpg');
+      background-size: cover;
+      background-position: center;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: transform 1.2s ease, opacity 1.2s ease;
+      z-index: 2;
+    }
+
+    /* === WHITE OVERLAY (base) === */
+    .overlay {
+      position: fixed;
+      bottom: -80%;
+      left: 49%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 500px;
+      background-color: white;
+      border-radius: 20px;
+      z-index: 1;
+      transition: bottom 1.2s ease;
+      overflow: hidden;
+    }
+
+    /* === JOIN OVERLAY FULLSCREEN (only modifies join overlay) === */
+    #join-overlay {
+      width: 100vw;           /* full width */
+      height: 100vh;          /* full screen height */
+      left: 50%;              /* center align */
+      transform: translateX(-50%);
+      bottom: -120%;          /* hidden initially */
+      background-color: white;
+      border-radius: 0;       /* remove rounded corners */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; /* center content vertically */
+      color: black;
+      transition: bottom 1.2s ease, opacity 1s ease;
+      opacity: 0;
+    }
+
+    /* overlay content */
+    .overlay-content {
+      padding: 2rem;
+      color: black;
+      text-align: center;
+    }
+
+    /* === COVERFLOW / SWIPER IMAGE STYLES === */
+    .coverflow-container {
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      scroll-behavior: smooth;
+      padding: 20px 0;
+      margin-top: 30px;
+    }
+
+    .coverflow {
+      display: inline-flex;
+      align-items: center;
+      gap: 40px;
+      transition: transform 0.5s ease;
+    }
+
+    .coverflow img {
+      width: 200px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+    }
+
+    .coverflow img:hover {
+      transform: scale(1.21);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .swiper-slide img {
+      width: 200px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+    }
+
+    .swiper-slide img:hover {
+      transform: scale(1.21);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    /* === TASKBAR === */
+    .taskbar {
+      position: fixed;
+      bottom: 35px;
+      left: 49%;
+      width: 50%;
+      transform: translateX(-50%) scale(0.8);
+      transform-origin: center bottom;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 25px;
+      padding: 10px 45px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: none;
+      z-index: 1000;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 0.4s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, 20px); }
+      to   { opacity: 1; transform: translate(-50%, 0); }
+    }
+
+    .taskbar button,
+    .taskbar a.brand {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      padding: 1px 8px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+
+    .taskbar button:hover,
+    .taskbar a.brand:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .taskbar .brand {
+      font-size: 1.2rem;
+      color: black !important;
+      margin-right: 20px;
+      cursor: pointer;
+    }
+
+    .taskbar .join-btn {
+      background-color: black;
+      color: white;
+      border-radius: 8px;
+      padding: 5px 10px;
+      transition: all 0.3s ease;
+    }
+
+    .taskbar .join-btn:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    /* === SCROLL ANIMATION STATES === */
+    /* Hero elements move out for overlay states */
+    .scrolled .build-text,
+    .services-active .build-text,
+    .about-active .build-text,
+    .programs-active .build-text,
+    .join-active .build-text {
+      transform: translateX(-150%) !important;
+      opacity: 0;
+    }
+
+    .scrolled .legacy-text,
+    .services-active .legacy-text,
+    .about-active .legacy-text,
+    .programs-active .legacy-text,
+    .join-active .legacy-text {
+      transform: translateX(150%) !important;
+      opacity: 0;
+    }
+
+    .scrolled .hero-button,
+    .services-active .hero-button,
+    .about-active .hero-button,
+    .programs-active .hero-button,
+    .join-active .hero-button {
+      transform: translateX(-150%) !important;
+      opacity: 0;
+    }
+
+    /* Overlay positions (slide-up behaviour) */
+    .scrolled #work-overlay {
+      bottom: 20%;
+    }
+
+    .services-active #work-overlay {
+      bottom: 120%;
+    }
+    .services-active #services-overlay {
+      bottom: 20%;
+    }
+
+    .about-active #services-overlay {
+      bottom: 120%;
+    }
+    .about-active #about-overlay {
+      bottom: 20%;
+    }
+
+    .programs-active #about-overlay {
+      bottom: 120%;
+    }
+    .programs-active #programs-overlay {
+      bottom: 20%;
+    }
+
+    .join-active #programs-overlay {
+      bottom: 120%;
+    }
+    .join-active #join-overlay {
+      bottom: 0%;
+    }
+
+    .join-active #join-overlay {
+      opacity: 1;
+    }
+
+    
+
+    /* === RESPONSIVE DESIGN === */
+    @media (max-width: 1200px) {
+      .build-text, .legacy-text {
+        font-size: 25vh;
+      }
+      .hero-button {
+        top: 30%;
+        left: 60%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .build-text, .legacy-text {
+        font-size: 18vh;
+      }
+      .hero-button {
+        top: 40%;
+        left: 55%;
+        width: 15vh;
+        height: 15vh;
+      }
+      .taskbar {
+        width: 90%;
+        padding: 8px 20px;
+        gap: 10px;
+      }
+      .overlay {
+        width: 85%;
+        height: 400px;
+      }
+      .coverflow img {
+        width: 150px;
+        height: 190px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .build-text, .legacy-text {
+        font-size: 12vh;
+      }
+      .hero-button {
+        width: 12vh;
+        height: 12vh;
+        top: 45%;
+        left: 50%;
+      }
+      .taskbar {
+        flex-direction: column;
+        gap: 8px;
+      }
+      .overlay {
+        width: 90%;
+      }
+    }
+
+    .hero-active .build-text,
+    .hero-active .legacy-text,
+    .hero-active .hero-button {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- WORK OVERLAY -->
+  <div class="overlay" id="work-overlay">
+    <section class="overlay-content">
+      <h2>Work</h2>
+
+      <!-- SWIPER COVERFLOW -->
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><img src="images/a.png" alt="Work 1"></div>
+          <div class="swiper-slide"><img src="images/b.png" alt="Work 2"></div>
+          <div class="swiper-slide"><img src="images/c.png" alt="Work 3"></div>
+          <div class="swiper-slide"><img src="images/d.png" alt="Work 4"></div>
+          <div class="swiper-slide"><img src="images/e.png" alt="Work 5"></div>
+          <div class="swiper-slide"><img src="images/f.png" alt="Work 6"></div>
+          <div class="swiper-slide"><img src="images/g.png" alt="Work 7"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- SERVICES OVERLAY -->
+  <div class="overlay" id="services-overlay">
+    <section class="overlay-content">
+      <h2>Services</h2>
+
+      <!-- SWIPER COVERFLOW -->
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><img src="images/h.png" alt="Service 1"></div>
+          <div class="swiper-slide"><img src="images/i.png" alt="Service 2"></div>
+          <div class="swiper-slide"><img src="images/j.png" alt="Service 3"></div>
+          <div class="swiper-slide"><img src="images/k.png" alt="Service 4"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ABOUT OVERLAY -->
+  <div class="overlay" id="about-overlay">
+    <section class="overlay-content">
+      <h2>About</h2>
+
+      <!-- SWIPER COVERFLOW (single image) -->
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="images/l.png" alt="About Image">
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- PROGRAMS OVERLAY -->
+  <div class="overlay" id="programs-overlay">
+    <section class="overlay-content">
+      <h2>Programs</h2>
+
+      <!-- SWIPER COVERFLOW -->
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><img src="images/m.png" alt="Program 1"></div>
+          <div class="swiper-slide"><img src="images/n.png" alt="Program 2"></div>
+          <div class="swiper-slide"><img src="images/o.png" alt="Program 3"></div>
+          <div class="swiper-slide"><img src="images/p.png" alt="Program 4"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- JOIN THE WAITLIST OVERLAY -->
+  <div class="overlay" id="join-overlay">
+    <section class="overlay-content">
+      <h2 style="font-size:4rem; margin-bottom:20px;">Join the Waitlist</h2>
+      <p style="font-size:1.2rem; max-width:700px; text-align:center;">
+        Be part of our creative journey. Join the waitlist to stay updated!
+      </p>
+    </section>
+  </div>
+
+  <!-- TASKBAR -->
+  <div class="taskbar">
+    <a href="#hero" class="brand">21 CREATIVES</a>
+
+    <button id="work-btn">Work</button>
+    <button id="services-btn">Services</button>
+    <button id="about-btn">About</button>
+    <button id="programs-btn">Programs</button>
+    <button class="join-btn">Join <br> The <br>Waitlist</button>
+  </div>
+
+  <!-- MAIN ELEMENTS -->
+  <main id="hero">
+    <span class="build-text">BUILD</span>
+    <button class="hero-button"></button>
+    <h1 class="legacy-text">LEGACY</h1>
+  </main>
+
+  <script>
+    // === BUTTONS & OVERLAYS ===
+    const buttons = [
+      document.getElementById("work-btn"),
+      document.getElementById("services-btn"),
+      document.getElementById("about-btn"),
+      document.getElementById("programs-btn"),
+      document.querySelector(".join-btn")
+    ];
+
+    const overlays = [
+      document.getElementById("work-overlay"),
+      document.getElementById("services-overlay"),
+      document.getElementById("about-overlay"),
+      document.getElementById("programs-overlay"),
+      document.getElementById("join-overlay")
+    ];
+
+    let overlayActive = false; // track if an overlay is active
+
+    // Connect buttons to overlays and animate hero elements
+    buttons.forEach((btn, i) => {
+      btn.addEventListener("click", () => {
+        overlayActive = true; // overlay is active
+
+        // Remove all existing overlay/scroll classes
+        document.body.classList.remove(
+          "scrolled",
+          "services-active",
+          "about-active",
+          "programs-active",
+          "join-active"
+        );
+
+        // Add the correct class for this overlay
+        const classes = ["scrolled", "services-active", "about-active", "programs-active", "join-active"];
+        document.body.classList.add(classes[i]);
+
+        // Animate hero elements out (selectors present to match original behavior)
+        const build = document.querySelector(".build-text");
+        const legacy = document.querySelector(".legacy-text");
+        const heroBtn = document.querySelector(".hero-button");
+        // (no changes to animation logic — kept intentionally empty as in original)
+      });
+    });
+
+    const brandButton = document.querySelector(".brand");
+    brandButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      overlayActive = false; // no overlay is active
+
+      // Remove all overlay classes
+      document.body.classList.remove(
+        "scrolled",
+        "services-active",
+        "about-active",
+        "programs-active",
+        "join-active"
+      );
+
+      // Add .hero-active to center hero texts
+      document.body.classList.add("hero-active");
+
+      // Temporarily disable scroll listener to prevent conflicts
+      window.removeEventListener("scroll", scrollHandler);
+
+      // Scroll back to top smoothly
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      // Remove .hero-active after animation completes and re-enable scroll
+      setTimeout(() => {
+        document.body.classList.remove("hero-active");
+        window.addEventListener("scroll", scrollHandler);
+      }, 500); // match your CSS transition duration
+    });
+
+    // Enable horizontal scrolling for any old coverflow containers (kept for backward-compat)
+    const coverflows = document.querySelectorAll(".coverflow-container");
+
+    coverflows.forEach((container) => {
+      const inner = container.querySelector(".coverflow");
+
+      container.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        container.scrollLeft += e.deltaY;
+
+        // Infinite loop logic (kept as was)
+        const scrollMax = inner.scrollWidth - container.clientWidth;
+        if (container.scrollLeft >= scrollMax) {
+          container.scrollLeft = 0; // jump back to start
+        } else if (container.scrollLeft <= 0) {
+          container.scrollLeft = scrollMax; // jump to end if scrolling back
+        }
+      });
+    });
+
+    // === SCROLL-BASED CLASS TRIGGERS ===
+    function scrollHandler() {
+      if (overlayActive) return; // prevent scroll animations if overlay is active
+
+      const scrollY = window.scrollY;
+      const triggerWork = window.innerHeight * 0.2;
+      const triggerServices = window.innerHeight * 1.2;
+      const triggerAbout = window.innerHeight * 2.2;
+      const triggerPrograms = window.innerHeight * 3.2;
+      const triggerJoin = window.innerHeight * 4.2;
+
+      if (scrollY > triggerWork && scrollY < triggerServices) {
+        document.body.classList.add("scrolled");
+        document.body.classList.remove("services-active");
+      } else if (scrollY >= triggerServices && scrollY < triggerAbout) {
+        document.body.classList.add("services-active");
+        document.body.classList.remove("about-active");
+      } else if (scrollY >= triggerAbout && scrollY < triggerPrograms) {
+        document.body.classList.add("about-active");
+        document.body.classList.remove("programs-active");
+      } else if (scrollY >= triggerPrograms && scrollY < triggerJoin) {
+        document.body.classList.add("programs-active");
+        document.body.classList.remove("join-active");
+      } else if (scrollY >= triggerJoin) {
+        document.body.classList.add("join-active");
+      } else {
+        document.body.classList.remove(
+          "scrolled",
+          "services-active",
+          "about-active",
+          "programs-active",
+          "join-active"
+        );
+      }
+    }
+
+    // Attach it to the scroll event
+    window.addEventListener("scroll", scrollHandler);
+
+    // === SWIPER INITIALIZATION ===
+    const swipers = document.querySelectorAll(".mySwiper");
+    swipers.forEach(swiperEl => {
+      new Swiper(swiperEl, {
+        slidesPerView: 'auto',      // Show multiple slides
+        spaceBetween: 40,           // Gap between slides
+        loop: true,                 // Infinite loop
+        centeredSlides: true,       // Center current slide
+        grabCursor: true,           // Change cursor on hover
+        mousewheel: true,           // Enable scroll by wheel
+        breakpoints: {              // Responsive
+          480: { spaceBetween: 20 },
+          768: { spaceBetween: 30 },
+          1200: { spaceBetween: 40 }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
