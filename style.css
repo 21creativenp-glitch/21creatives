@@ -1,0 +1,355 @@
+    /* === GENERAL === */
+    body {
+      margin: 0;
+      font-family: 'Anton', sans-serif;
+      background-color: #1a1a1a;
+      color: #ffffff;
+      height: 800vh;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* === BUILD TEXT === */
+    .build-text {
+      position: fixed;
+      top: 17%;
+      left: 43%;
+      transform: translateX(-50%);
+      font-size: 38vh;
+      line-height: 0.9;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)),
+        url('images/bg.jpg');
+      background-size: cover;
+      background-position: center;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: transform 1.2s ease, opacity 1.2s ease;
+      z-index: 2;
+    }
+
+    /* === HERO BUTTON === */
+    .hero-button {
+      position: fixed;
+      top: 25%;
+      left: 64%;
+      width: 21vh;
+      height: 21vh;
+      border: none;
+      border-radius: 50%;
+      background-image: url('images/2.png'), url('images/1.jpg');
+      background-size: 80% 80%, cover;
+      background-position: center center, 50% 20%;
+      background-repeat: no-repeat, no-repeat;
+      cursor: pointer;
+      animation: bounce 1.5s infinite;
+      transition: transform 1.2s ease, opacity 1.2s ease;
+      z-index: 2;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10%); }
+    }
+
+    /* === LEGACY TEXT === */
+    .legacy-text {
+      position: fixed;
+      top: 26%;
+      left: 49.5%;
+      transform: translateX(-50%);
+      font-size: 38vh;
+      line-height: 0.9;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)),
+        url('images/bg.jpg');
+      background-size: cover;
+      background-position: center;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: transform 1.2s ease, opacity 1.2s ease;
+      z-index: 2;
+    }
+
+    /* === WHITE OVERLAY (base) === */
+    .overlay {
+      position: fixed;
+      bottom: -80%;
+      left: 49%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 500px;
+      background-color: white;
+      border-radius: 20px;
+      z-index: 1;
+      transition: bottom 1.2s ease;
+      overflow: hidden;
+    }
+
+    /* === JOIN OVERLAY FULLSCREEN (only modifies join overlay) === */
+    #join-overlay {
+      width: 100vw;           /* full width */
+      height: 100vh;          /* full screen height */
+      left: 50%;              /* center align */
+      transform: translateX(-50%);
+      bottom: -120%;          /* hidden initially */
+      background-color: white;
+      border-radius: 0;       /* remove rounded corners */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; /* center content vertically */
+      color: black;
+      transition: bottom 1.2s ease, opacity 1s ease;
+      opacity: 0;
+    }
+
+    /* overlay content */
+    .overlay-content {
+      padding: 2rem;
+      color: black;
+      text-align: center;
+    }
+
+    /* === COVERFLOW / SWIPER IMAGE STYLES === */
+    .coverflow-container {
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      scroll-behavior: smooth;
+      padding: 20px 0;
+      margin-top: 30px;
+    }
+
+    .coverflow {
+      display: inline-flex;
+      align-items: center;
+      gap: 40px;
+      transition: transform 0.5s ease;
+    }
+
+    .coverflow img {
+      width: 200px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+    }
+
+    .coverflow img:hover {
+      transform: scale(1.21);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .swiper-slide img {
+      width: 200px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+    }
+
+    .swiper-slide img:hover {
+      transform: scale(1.21);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    /* === TASKBAR === */
+    .taskbar {
+      position: fixed;
+      bottom: 35px;
+      left: 49%;
+      width: 50%;
+      transform: translateX(-50%) scale(0.8);
+      transform-origin: center bottom;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 25px;
+      padding: 10px 45px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: none;
+      z-index: 1000;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 0.4s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, 20px); }
+      to   { opacity: 1; transform: translate(-50%, 0); }
+    }
+
+    .taskbar button,
+    .taskbar a.brand {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      padding: 1px 8px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+
+    .taskbar button:hover,
+    .taskbar a.brand:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .taskbar .brand {
+      font-size: 1.2rem;
+      color: black !important;
+      margin-right: 20px;
+      cursor: pointer;
+    }
+
+    .taskbar .join-btn {
+      background-color: black;
+      color: white;
+      border-radius: 8px;
+      padding: 5px 10px;
+      transition: all 0.3s ease;
+    }
+
+    .taskbar .join-btn:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    /* === SCROLL ANIMATION STATES === */
+    /* Hero elements move out for overlay states */
+    .scrolled .build-text,
+    .services-active .build-text,
+    .about-active .build-text,
+    .programs-active .build-text,
+    .join-active .build-text {
+      transform: translateX(-150%) !important;
+      opacity: 0;
+    }
+
+    .scrolled .legacy-text,
+    .services-active .legacy-text,
+    .about-active .legacy-text,
+    .programs-active .legacy-text,
+    .join-active .legacy-text {
+      transform: translateX(150%) !important;
+      opacity: 0;
+    }
+
+    .scrolled .hero-button,
+    .services-active .hero-button,
+    .about-active .hero-button,
+    .programs-active .hero-button,
+    .join-active .hero-button {
+      transform: translateX(-150%) !important;
+      opacity: 0;
+    }
+
+    /* Overlay positions (slide-up behaviour) */
+    .scrolled #work-overlay {
+      bottom: 20%;
+    }
+
+    .services-active #work-overlay {
+      bottom: 120%;
+    }
+    .services-active #services-overlay {
+      bottom: 20%;
+    }
+
+    .about-active #services-overlay {
+      bottom: 120%;
+    }
+    .about-active #about-overlay {
+      bottom: 20%;
+    }
+
+    .programs-active #about-overlay {
+      bottom: 120%;
+    }
+    .programs-active #programs-overlay {
+      bottom: 20%;
+    }
+
+    .join-active #programs-overlay {
+      bottom: 120%;
+    }
+    .join-active #join-overlay {
+      bottom: 0%;
+    }
+
+    .join-active #join-overlay {
+      opacity: 1;
+    }
+
+    
+
+    /* === RESPONSIVE DESIGN === */
+    @media (max-width: 1200px) {
+      .build-text, .legacy-text {
+        font-size: 25vh;
+      }
+      .hero-button {
+        top: 30%;
+        left: 60%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .build-text, .legacy-text {
+        font-size: 18vh;
+      }
+      .hero-button {
+        top: 40%;
+        left: 55%;
+        width: 15vh;
+        height: 15vh;
+      }
+      .taskbar {
+        width: 90%;
+        padding: 8px 20px;
+        gap: 10px;
+      }
+      .overlay {
+        width: 85%;
+        height: 400px;
+      }
+      .coverflow img {
+        width: 150px;
+        height: 190px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .build-text, .legacy-text {
+        font-size: 12vh;
+      }
+      .hero-button {
+        width: 12vh;
+        height: 12vh;
+        top: 45%;
+        left: 50%;
+      }
+      .taskbar {
+        flex-direction: column;
+        gap: 8px;
+      }
+      .overlay {
+        width: 90%;
+      }
+    }
+
+    .hero-active .build-text,
+    .hero-active .legacy-text,
+    .hero-active .hero-button {
+      transform: translateX(0);
+      opacity: 1;
+    }
