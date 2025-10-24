@@ -70,3 +70,43 @@ body {
   letter-spacing: 4px;
   margin: 0;
 }
+/* === NEW HERO CONTAINER + PRODUCTS SECTION === */
+.hero-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* === PRODUCTS SECTION === */
+.products-section {
+  position: relative;       /* normal flow below hero */
+  min-height: 200vh;
+  background: white;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  /* start completely below hero */
+  transform: translateY(100%);
+  
+  /* smooth sliding */
+  transition: transform 0.6s ease-out;
+
+  z-index: 3;
+  will-change: transform;    /* optimize for GPU */
+}
+
+/* Optional: add inner spacing if you have content */
+.products-section h2,
+.products-section p {
+  margin: 0 20px;
+}
+
+
+
