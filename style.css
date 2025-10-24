@@ -19,7 +19,7 @@
       line-height: 0.9;
       background-image:
         linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)),
-        url('images/bg.jpg');
+        url('images/main/hero/bg.jpg');
       background-size: cover;
       background-position: center;
       -webkit-background-clip: text;
@@ -37,7 +37,7 @@
       height: 21vh;
       border: none;
       border-radius: 50%;
-      background-image: url('images/2.png'), url('images/1.jpg');
+      background-image: url('images/main/hero/2.png'), url('images/main/hero/1.jpg');
       background-size: 80% 80%, cover;
       background-position: center center, 50% 20%;
       background-repeat: no-repeat, no-repeat;
@@ -62,7 +62,7 @@
       line-height: 0.9;
       background-image:
         linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)),
-        url('images/bg.jpg');
+        url('images/main/hero/bg.jpg');
       background-size: cover;
       background-position: center;
       -webkit-background-clip: text;
